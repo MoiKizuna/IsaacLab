@@ -1335,6 +1335,8 @@ class Articulation(AssetBase):
                 self.write_joint_velocity_limit_to_sim(actuator.velocity_limit, joint_ids=actuator.joint_indices)
                 self.write_joint_armature_to_sim(actuator.armature, joint_ids=actuator.joint_indices)
                 self.write_joint_friction_to_sim(actuator.friction, joint_ids=actuator.joint_indices)
+                self._data.default_joint_stiffness[:, actuator.joint_indices] = actuator.stiffness
+                self._data.default_joint_damping[:, actuator.joint_indices] = actuator.damping
             else:
                 # the gains and limits are processed by the actuator model
                 # we set gains to zero, and torque limit to a high value in simulation to avoid any interference
